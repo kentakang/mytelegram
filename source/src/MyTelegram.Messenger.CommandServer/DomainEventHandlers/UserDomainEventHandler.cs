@@ -15,20 +15,20 @@ public class UserDomainEventHandler :
 
     public async Task HandleAsync(IDomainEvent<UserAggregate, UserId, UserCreatedEvent> domainEvent, CancellationToken cancellationToken)
     {
-        if (!domainEvent.AggregateEvent.Bot)
-        {
-            var welcomeMessage = "Welcome to use MyTelegram!";
-            var sendMessageInput = new SendMessageInput(new RequestInfo(0,
-                    MyTelegramServerDomainConsts.OfficialUserId,
-                    domainEvent.AggregateEvent.RequestInfo.AuthKeyId,
-                    domainEvent.AggregateEvent.RequestInfo.PermAuthKeyId,
-                    Guid.NewGuid(), 0, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()),
-                MyTelegramServerDomainConsts.OfficialUserId,
-                new Peer(PeerType.User, domainEvent.AggregateEvent.UserId,domainEvent.AggregateEvent.AccessHash),
-                welcomeMessage,
-                _randomHelper.NextLong());
+        // if (!domainEvent.AggregateEvent.Bot)
+        // {
+        //     var welcomeMessage = "Welcome to use MyTelegram!";
+        //     var sendMessageInput = new SendMessageInput(new RequestInfo(0,
+        //             MyTelegramServerDomainConsts.OfficialUserId,
+        //             domainEvent.AggregateEvent.RequestInfo.AuthKeyId,
+        //             domainEvent.AggregateEvent.RequestInfo.PermAuthKeyId,
+        //             Guid.NewGuid(), 0, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()),
+        //         MyTelegramServerDomainConsts.OfficialUserId,
+        //         new Peer(PeerType.User, domainEvent.AggregateEvent.UserId,domainEvent.AggregateEvent.AccessHash),
+        //         welcomeMessage,
+        //         _randomHelper.NextLong());
 
-            await _messageAppService.SendMessageAsync(sendMessageInput);
-        }
+        //     await _messageAppService.SendMessageAsync(sendMessageInput);
+        // }
     }
 }
